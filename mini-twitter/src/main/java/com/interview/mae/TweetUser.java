@@ -24,7 +24,7 @@ public class TweetUser {
     public Set<Integer> followTo;
 
     // all posted tweet list
-    private List<Tweet> postedTweets;
+    public List<Tweet> postedTweets;
 
     public TweetUser(int user_id) {
         this.user_id = user_id;
@@ -61,15 +61,16 @@ public class TweetUser {
         int n = Math.min(10, postedTweets.size());
         List<Tweet> ans = new ArrayList<>(n);
 
-        while (n > 0) {
-            ans.add(postedTweets.get(n-1));
-            n--;
+        int i = 0;
+        while (i < n) {
+            ans.add(postedTweets.get(i));
+            i++;
         }
 
         return ans;
     }
 
-    public List<Tweet> queryAllTopK(int K, Map<Integer, TweetUser> userMap) {
+    public List<Tweet> queryAllTopK( Map<Integer, TweetUser> userMap) {
         List<TweetUser> usersList = followTo.stream().map(userId -> {
             return userMap.get(userId);
         }).collect(Collectors.toList());
@@ -91,11 +92,11 @@ public class TweetUser {
             return (t1.id - t2.id);
         });
 
-        int n = 10;
+        int i = 0;
 
-        while (n > 0) {
-            ans.add(tweets.get(n-1));
-            n--;
+        while (i < 10) {
+            ans.add(tweets.get(i));
+            i++;
         }
 
         return ans;

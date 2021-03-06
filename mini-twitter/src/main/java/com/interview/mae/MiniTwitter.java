@@ -66,7 +66,7 @@ public class MiniTwitter {
 
         TweetUser user = userMap.get(user_id);
 
-        List<Tweet> tweets = user.queryAllTopK(10, this.userMap);
+        List<Tweet> tweets = user.queryAllTopK(this.userMap);
         return tweets;
     }
 
