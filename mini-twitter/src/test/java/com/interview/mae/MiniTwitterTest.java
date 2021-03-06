@@ -12,11 +12,11 @@ import java.util.List;
  */
 public class MiniTwitterTest {
 
-    private com.interview.mae.submission.MiniTwitter miniTwitter;
+    private MiniTwitter miniTwitter;
 
     @Before
     public void initMiniTwitter() {
-        miniTwitter = new com.interview.mae.submission.MiniTwitter();
+        miniTwitter = new MiniTwitter();
     }
 
 
@@ -77,10 +77,10 @@ public class MiniTwitterTest {
 
         // follow A -> B
         miniTwitter.follow(userA, userB);
-        com.interview.mae.submission.TweetUser tweetUserA = miniTwitter.getUser(userA);
+        TweetUser tweetUserA = miniTwitter.getUser(userA);
         Assert.assertNotNull(tweetUserA);
 
-        com.interview.mae.submission.TweetUser tweetUserB = miniTwitter.getUser(userB);
+        TweetUser tweetUserB = miniTwitter.getUser(userB);
         Assert.assertNotNull(tweetUserB);
 
         Assert.assertTrue(tweetUserA.followTo.contains(userB));

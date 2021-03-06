@@ -70,8 +70,8 @@ public class TweetUser {
         return ans;
     }
 
-    public List<Tweet> queryAllTopK( Map<Integer, com.interview.mae.submission.TweetUser> userMap) {
-        List<com.interview.mae.submission.TweetUser> usersList = followTo.stream().map(userId -> {
+    public List<Tweet> queryAllTopK(Map<Integer, TweetUser> userMap) {
+        List<TweetUser> usersList = followTo.stream().map(userId -> {
             return userMap.get(userId);
         }).collect(Collectors.toList());
 

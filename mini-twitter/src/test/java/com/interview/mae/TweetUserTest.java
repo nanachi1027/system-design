@@ -15,15 +15,15 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class TweetUserTest {
 
-    private com.interview.mae.submission.TweetUser tweetUserA;
-    private com.interview.mae.submission.TweetUser tweetUserB;
+    private TweetUser tweetUserA;
+    private TweetUser tweetUserB;
     private AtomicInteger tweetIdGenerator;
-    private Map<Integer, com.interview.mae.submission.TweetUser> userMap;
+    private Map<Integer, TweetUser> userMap;
 
     @Before
     public void initTweetUser() {
-        this.tweetUserA = new com.interview.mae.submission.TweetUser(0);
-        this.tweetUserB = new com.interview.mae.submission.TweetUser(1);
+        this.tweetUserA = new TweetUser(0);
+        this.tweetUserB = new TweetUser(1);
         this.tweetIdGenerator = new AtomicInteger(0);
 
         Assert.assertNotNull(tweetUserA.followers);
@@ -66,8 +66,8 @@ public class TweetUserTest {
 
         // here we call get last posted tweets method and make sure the return tweets returns in order
         List<Tweet> queryResult = tweetUserA.getLastPostedTweets();
-        for (int i = 0; i < 10; i++) {
-            int tweetId = queryResult.get(i).id;
+        for (int i = 10; i >= 1; i--) {
+            int tweetId = queryResult.get(10-i).id;
             Assert.assertEquals(i, tweetId);
         }
     }
