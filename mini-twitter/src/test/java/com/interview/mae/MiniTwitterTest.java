@@ -6,19 +6,17 @@ import org.junit.Test;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
-
 /**
  * @Author: Mae
  * @Date: 2021/3/6 3:58 下午
  */
 public class MiniTwitterTest {
 
-    private MiniTwitter miniTwitter;
+    private com.interview.mae.submission.MiniTwitter miniTwitter;
 
     @Before
     public void initMiniTwitter() {
-        miniTwitter = new MiniTwitter();
+        miniTwitter = new com.interview.mae.submission.MiniTwitter();
     }
 
 
@@ -79,10 +77,10 @@ public class MiniTwitterTest {
 
         // follow A -> B
         miniTwitter.follow(userA, userB);
-        TweetUser tweetUserA = miniTwitter.getUser(userA);
+        com.interview.mae.submission.TweetUser tweetUserA = miniTwitter.getUser(userA);
         Assert.assertNotNull(tweetUserA);
 
-        TweetUser tweetUserB = miniTwitter.getUser(userB);
+        com.interview.mae.submission.TweetUser tweetUserB = miniTwitter.getUser(userB);
         Assert.assertNotNull(tweetUserB);
 
         Assert.assertTrue(tweetUserA.followTo.contains(userB));
