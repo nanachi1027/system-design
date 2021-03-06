@@ -15,6 +15,12 @@ public class MiniTwitter {
     private AtomicInteger tweetIdGenerator;
     private Map<Integer, TweetUser> userMap;
 
+    public TweetUser getUser(int user_id) {
+        if (!this.userMap.containsKey(user_id)) {
+            return null;
+        }
+        return userMap.get(user_id);
+    }
 
     public MiniTwitter() {
         userMap = new HashMap<>();
@@ -31,7 +37,7 @@ public class MiniTwitter {
         int tweetId = this.tweetIdGenerator.getAndIncrement();
         tweet.id = tweetId;
 
-        if (userMap.containsKey(user_id)) {
+        if (!userMap.containsKey(user_id)) {
             TweetUser user = new TweetUser(user_id);
             userMap.put(user.user_id, user);
         }

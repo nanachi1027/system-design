@@ -52,7 +52,7 @@ public class TweetUser {
 
         // refresh posted tweet order
         Collections.sort(postedTweets, (Tweet t1, Tweet t2) -> {
-            return t1.id - t2.id;
+            return (-t1.id + t2.id);
         });
     }
 
@@ -89,7 +89,7 @@ public class TweetUser {
         // execute another sort and return result
         List<Tweet> ans = new ArrayList<>();
         Collections.sort(tweets, (t1, t2) -> {
-            return (t1.id - t2.id);
+            return (-t1.id + t2.id);
         });
 
         int i = 0;
