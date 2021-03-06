@@ -52,7 +52,7 @@ public class TweetUser {
 
         // refresh posted tweet order
         Collections.sort(postedTweets, (Tweet t1, Tweet t2) -> {
-            return t1.id - t2.id;
+            return (-t1.id + t2.id);
         });
     }
 
@@ -70,8 +70,8 @@ public class TweetUser {
         return ans;
     }
 
-    public List<Tweet> queryAllTopK( Map<Integer, TweetUser> userMap) {
-        List<TweetUser> usersList = followTo.stream().map(userId -> {
+    public List<Tweet> queryAllTopK( Map<Integer, com.interview.mae.submission.TweetUser> userMap) {
+        List<com.interview.mae.submission.TweetUser> usersList = followTo.stream().map(userId -> {
             return userMap.get(userId);
         }).collect(Collectors.toList());
 
@@ -89,7 +89,7 @@ public class TweetUser {
         // execute another sort and return result
         List<Tweet> ans = new ArrayList<>();
         Collections.sort(tweets, (t1, t2) -> {
-            return (t1.id - t2.id);
+            return (-t1.id + t2.id);
         });
 
         int i = 0;

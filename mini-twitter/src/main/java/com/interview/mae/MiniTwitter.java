@@ -1,6 +1,5 @@
 package com.interview.mae;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,8 +12,14 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MiniTwitter {
 
     private AtomicInteger tweetIdGenerator;
-    private Map<Integer, TweetUser> userMap;
+    private Map<Integer, com.interview.mae.submission.TweetUser> userMap;
 
+    public com.interview.mae.submission.TweetUser getUser(int user_id) {
+        if (!this.userMap.containsKey(user_id)) {
+            return null;
+        }
+        return userMap.get(user_id);
+    }
 
     public MiniTwitter() {
         userMap = new HashMap<>();
@@ -31,12 +36,12 @@ public class MiniTwitter {
         int tweetId = this.tweetIdGenerator.getAndIncrement();
         tweet.id = tweetId;
 
-        if (userMap.containsKey(user_id)) {
-            TweetUser user = new TweetUser(user_id);
+        if (!userMap.containsKey(user_id)) {
+            com.interview.mae.submission.TweetUser user = new com.interview.mae.submission.TweetUser(user_id);
             userMap.put(user.user_id, user);
         }
 
-        TweetUser user = userMap.get(user_id);
+        com.interview.mae.submission.TweetUser user = userMap.get(user_id);
 
         // append posted tweet info to user
         user.postATweet(tweet);
@@ -51,7 +56,7 @@ public class MiniTwitter {
      * @return a list of 10 new feeds recently and sorted by timeline
      */
     public List<Tweet> getNewsFeed(int user_id) {
-        TweetUser user = this.userMap.get(user_id);
+        com.interview.mae.submission.TweetUser user = this.userMap.get(user_id);
         return user.getLastPostedTweets();
     }
 
@@ -61,10 +66,10 @@ public class MiniTwitter {
      */
     public List<Tweet> getTimeline(int user_id) {
         if (!userMap.containsKey(user_id)) {
-            userMap.put(user_id, new TweetUser(user_id));
+            userMap.put(user_id, new com.interview.mae.submission.TweetUser(user_id));
         }
 
-        TweetUser user = userMap.get(user_id);
+        com.interview.mae.submission.TweetUser user = userMap.get(user_id);
 
         List<Tweet> tweets = user.queryAllTopK(this.userMap);
         return tweets;
@@ -82,16 +87,16 @@ public class MiniTwitter {
     public void follow(int from_user_id, int to_user_id) {
         // first checkout users are exists in cache
         if (!userMap.containsKey(from_user_id)) {
-            userMap.put(from_user_id, new TweetUser(from_user_id));
+            userMap.put(from_user_id, new com.interview.mae.submission.TweetUser(from_user_id));
         }
 
         if (!userMap.containsKey(to_user_id)) {
-            userMap.put(to_user_id, new TweetUser(to_user_id));
+            userMap.put(to_user_id, new com.interview.mae.submission.TweetUser(to_user_id));
         }
 
         // cause we use set to store followers and followTo, so we don't care duplicated user ids
-        TweetUser follower = userMap.get(from_user_id);
-        TweetUser beFollowed = userMap.get(to_user_id);
+        com.interview.mae.submission.TweetUser follower = userMap.get(from_user_id);
+        com.interview.mae.submission.TweetUser beFollowed = userMap.get(to_user_id);
 
         follower.followTo.add(beFollowed.user_id);
         beFollowed.followers.add(follower.user_id);
@@ -111,17 +116,17 @@ public class MiniTwitter {
         // first make sure user_id is created and really exists in MiniTwitter's cache
         // and make sure the relation ship that from_user -> follow -> to_user already established, if not establish
         if (!this.userMap.containsKey(from_user_id)) {
-            TweetUser fromUser = new TweetUser(from_user_id);
+            com.interview.mae.submission.TweetUser fromUser = new com.interview.mae.submission.TweetUser(from_user_id);
             userMap.put(from_user_id, fromUser);
         }
 
         if (!this.userMap.containsKey(to_user_id)) {
-            TweetUser toUser = new TweetUser(to_user_id);
+            com.interview.mae.submission.TweetUser toUser = new com.interview.mae.submission.TweetUser(to_user_id);
             userMap.put(to_user_id, toUser);
         }
 
-        TweetUser fromUser = userMap.get(from_user_id);
-        TweetUser toUser = userMap.get(to_user_id);
+        com.interview.mae.submission.TweetUser fromUser = userMap.get(from_user_id);
+        com.interview.mae.submission.TweetUser toUser = userMap.get(to_user_id);
 
         // only relationship exists we can remove
         if (fromUser.followTo.contains(to_user_id)) {

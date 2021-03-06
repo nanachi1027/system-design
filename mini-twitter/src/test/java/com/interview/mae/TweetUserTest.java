@@ -9,23 +9,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static org.junit.Assert.*;
-
 /**
  * @Author: Mae
  * @Date: 2021/3/6 3:59 下午
  */
 public class TweetUserTest {
 
-    private TweetUser tweetUserA;
-    private TweetUser tweetUserB;
+    private com.interview.mae.submission.TweetUser tweetUserA;
+    private com.interview.mae.submission.TweetUser tweetUserB;
     private AtomicInteger tweetIdGenerator;
-    private Map<Integer, TweetUser> userMap;
+    private Map<Integer, com.interview.mae.submission.TweetUser> userMap;
 
     @Before
     public void initTweetUser() {
-        this.tweetUserA = new TweetUser(0);
-        this.tweetUserB = new TweetUser(1);
+        this.tweetUserA = new com.interview.mae.submission.TweetUser(0);
+        this.tweetUserB = new com.interview.mae.submission.TweetUser(1);
         this.tweetIdGenerator = new AtomicInteger(0);
 
         Assert.assertNotNull(tweetUserA.followers);
